@@ -20,4 +20,16 @@ RSpec.describe DriverApplication, type: :model do
       end
     end
   end
+
+  describe 'driver_application validation' do
+    context 'valid' do
+      let(:driver_application) { FactoryGirl.build(:driver_application) } # generates a valid driver_application data
+      
+      it 'valid driver_application data' do
+        expect(driver_application.valid?).to eq(true)
+      end
+
+      it { expect(driver_application.status).to eq('pending') }
+    end
+  end
 end
