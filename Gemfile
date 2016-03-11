@@ -40,6 +40,7 @@ group :development, :test do
   gem 'haml-rails'
   gem 'byebug'
   gem 'shoulda-matchers'
+  gem 'capybara'
 end
 
 group :development do
