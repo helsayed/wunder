@@ -11,5 +11,13 @@ RSpec.describe DriverApplication, type: :model do
         expect(driver_application.user.class).to eq(User)
       end
     end
+
+    context 'city association' do
+      it { should belong_to(:city) }
+
+      it 'should return city' do
+        expect(driver_application.user.class).to eq(City)
+      end
+    end
   end
 end
