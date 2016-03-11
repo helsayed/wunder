@@ -58,7 +58,7 @@ RSpec.feature "driver_application", :type => :feature do
   end
 
   scenario "filter by status accepted" do 
-    select 'pending', from: "status_filter"
+    select 'accepted', from: "status_filter"
     click_button 'filter'
     expect(page).not_to have_text(pending_driver_application.city.name)
     expect(page).to have_text(accepted_driver_application.city.name)
@@ -66,7 +66,7 @@ RSpec.feature "driver_application", :type => :feature do
   end
 
   scenario "filter by status rejected" do 
-    select 'pending', from: "status_filter"
+    select 'rejected', from: "status_filter"
     click_button 'filter'
     expect(page).not_to have_text(pending_driver_application.city.name)
     expect(page).not_to have_text(accepted_driver_application.city.name)
@@ -94,6 +94,18 @@ RSpec.feature "driver_application", :type => :feature do
     click_button 'filter'
     expect(page).not_to have_text(pending_driver_application.city.name)
     expect(page).not_to have_text(accepted_driver_application.city.name)
+    expect(page).to have_text(rejected_driver_application.city.name)
+  end
+
+  scenario "filter by city alex and accepted" do 
+    select 'Alexandria', from: "city_filter"
+    select 'accepted', from: "status_filter"
+    click_button 'filter'
+    expect(page).not_to have_text(pending_driver_application.city.name)
+    expect(page).not_to have_text(accepted_driver_application.city.name)
+    expect(page).not_to have_text(rejected_driver_application.city.name)
+    select 'rejected', from: "status_filter"
+    click_button 'filter'
     expect(page).to have_text(rejected_driver_application.city.name)
   end
 
