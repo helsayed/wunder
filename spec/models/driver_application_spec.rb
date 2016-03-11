@@ -22,7 +22,7 @@ RSpec.describe DriverApplication, type: :model do
   end
 
   describe 'driver_application validation' do
-    context 'valid' do
+    context 'valid data' do
       let(:driver_application) { FactoryGirl.build(:driver_application) } # generates a valid driver_application data
       
       it 'valid driver_application data' do
@@ -30,6 +30,30 @@ RSpec.describe DriverApplication, type: :model do
       end
 
       it { expect(driver_application.status).to eq('pending') }
+    end
+
+    context 'invalid nil phone' do
+      let(:driver_application) { FactoryGirl.build(:driver_application, phone: nil) }
+
+      it 'should not be valid' do
+        expect(driver_application.valid?).to eq(false)
+      end
+
+      it 'should have error on phone' do
+        expect(driver_application).to  have(1).error_on(:phone)
+      end
+    end
+
+    context 'invalid empty phone' do
+      let(:driver_application) { FactoryGirl.build(:driver_application, phone: '') }
+
+      it 'should not be valid' do
+        expect(driver_application.valid?).to eq(false)
+      end
+
+      it 'should have error on phone' do
+        expect(driver_application).to  have(1).error_on(:phone)
+      end
     end
   end
 end
