@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe 'first_name validation' do
-    context 'with valid first_name' do
+  describe 'user validation' do
+    context 'valid' do
       let(:user) { FactoryGirl.build(:user) } # generates a valid user data
       
       it 'valid user data' do
@@ -19,6 +19,18 @@ RSpec.describe User, type: :model do
 
       it 'should have error on first_name' do
         expect(user).to  have(1).error_on(:first_name)
+      end
+    end
+
+    context 'invalid last_name' do
+      let(:user) { FactoryGirl.build(:user, last_name: nil) }
+
+      it 'should not be valid' do
+        expect(user.valid?).to eq(false)
+      end
+
+      it 'should have error on last_name' do
+        expect(user).to  have(1).error_on(:last_name)
       end
     end
   end
