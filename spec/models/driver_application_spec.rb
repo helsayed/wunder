@@ -55,5 +55,44 @@ RSpec.describe DriverApplication, type: :model do
         expect(driver_application).to  have(1).error_on(:phone)
       end
     end
+
+    context 'invalid status' do
+      context 'nil status' do 
+        let(:driver_application) { FactoryGirl.build(:driver_application, status: nil) }
+
+        it 'status should not be nil' do
+          expect(driver_application.valid?).to eq(false)
+        end
+
+        it 'should have error on status' do
+          expect(driver_application).to  have(1).error_on(:status)
+        end
+      end
+
+      context 'invalid string status' do 
+        let(:driver_application) { FactoryGirl.build(:driver_application, status: 'some status') }
+
+        it 'status should not be nil' do
+          expect(driver_application.valid?).to eq(false)
+        end
+
+        it 'should have error on status' do
+          expect(driver_application).to  have(1).error_on(:status)
+        end
+      end
+
+      context 'invalid empty status' do 
+        let(:driver_application) { FactoryGirl.build(:driver_application, status: '') }
+
+        it 'status should not be nil' do
+          expect(driver_application.valid?).to eq(false)
+        end
+
+        it 'should have error on status' do
+          expect(driver_application).to  have(1).error_on(:status)
+        end
+      end
+    end
   end
+
 end
