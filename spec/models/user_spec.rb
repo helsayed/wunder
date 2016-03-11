@@ -1,5 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'first_name validation' do
+    context 'with valid first_name' do
+      let(:user) { FactoryGirl.build(:user) } # generates a valid user data
+      
+      it 'valid user data' do
+        expect(user.valid?).to eq(true)
+      end
+    end
+  end
 end
