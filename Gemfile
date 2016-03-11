@@ -39,6 +39,7 @@ group :development, :test do
   gem 'faker'
   gem 'haml-rails'
   gem 'byebug'
+  gem 'shoulda-matchers'
 end
 
 group :development do
