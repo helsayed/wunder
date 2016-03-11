@@ -99,12 +99,25 @@ RSpec.describe DriverApplication, type: :model do
     let(:driver_application) { FactoryGirl.create(:driver_application) }
     
     context 'accept driver status' do
-      it 'accept driver application' do 
+      it 'accept driver application from pending' do 
         expect{ 
           driver_application.accept
           }.to change{ driver_application }.from('pending').to('accepted')
       end
     end
   end
+
+  describe '#reject' do
+    let(:driver_application) { FactoryGirl.create(:driver_application) }
+    
+    context 'reject driver status' do
+      it 'reject driver application from pending' do 
+        expect{ 
+          driver_application.accept
+          }.to change{ driver_application }.from('pending').to('rejected')
+      end
+    end
+  end
+
 
 end
