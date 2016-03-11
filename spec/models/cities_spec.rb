@@ -21,4 +21,5 @@ RSpec.describe Cities, type: :model do
         expect(city).to  have(1).error_on(:name)
       end
     end
+  end
 end
