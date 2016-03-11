@@ -35,14 +35,27 @@ RSpec.describe User, type: :model do
     end
 
     context 'invalid email' do
-      let(:user) { FactoryGirl.build(:user, email: nil) }
+      context 'nil email' do
+        let(:user) { FactoryGirl.build(:user, email: nil) }
 
-      it 'should not be valid' do
-        expect(user.valid?).to eq(false)
+        it 'should not be valid' do
+          expect(user.valid?).to eq(false)
+        end
+
+        it 'should have error on email' do
+          expect(user).to  have(1).error_on(:email)
+        end
       end
+      context 'invalid email with empty string' do
+        let(:user) { FactoryGirl.build(:user, email: '') }
 
-      it 'should have error on email' do
-        expect(user).to  have(1).error_on(:email)
+        it 'should not be valid' do
+          expect(user.valid?).to eq(false)
+        end
+
+        it 'should have error on email' do
+          expect(user).to  have(1).error_on(:email)
+        end
       end
     end
   end
